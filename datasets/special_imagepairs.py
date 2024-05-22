@@ -6,7 +6,7 @@ import torch
 from torchvision import transforms
 
 class SpecialSeqPairs(torch.utils.data.Dataset):
-    def __init__(self, npz_path, transform=transforms.Compose([transforms.ToTensor(), transforms.Resize(256,256)])):
+    def __init__(self, npz_path, transform=transforms.Compose([transforms.ToTensor(), transforms.Resize(size=(256,256))])):
         super().__init__()
         data = np.load(npz_path)
         self.image_dataset = transform(np.moveaxis(data['images'], 3, 1))

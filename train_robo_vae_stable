@@ -28,7 +28,7 @@ mkdir -p "$OUTDIR"
 echo $MODEL > "$OUTDIR/model"
 
 date >> "$OUTDIR/progress.txt"
-./.colorize ./robo_train/robo_train.py                      \
+./robo_train.py                      \
     --log-to "/runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
     --learning-rate "0.0002"                \

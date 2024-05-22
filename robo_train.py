@@ -17,7 +17,7 @@ from torch import nn, optim
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
 from torchvision.utils import save_image
-from ..util import DynamicLoad, setup_logging, to_variable
+from util import DynamicLoad, setup_logging, to_variable
 
 logger = setup_logging(os.path.basename(__file__))
 
