@@ -22,7 +22,7 @@ elif [ -z "$DATA_FILE" ]; then
 fi
 
 OUTDIR="/experiments/${EXPERIMENT_ID}/${DATA_NAME}_${W1}_${W2}_${INNER}_${ALPHA}_${REHU}_scaled${SCALE_FX}"
-MODEL="vae_trajectory[stable,w=$W1,bce=$W2,a=$ALPHA,projfn=$INNER,h=320,hp=200,rehu=$REHU,scale_fx=${SCALE_FX}]"
+MODEL="vae_trajectory[stable,w=$W1,bce=$W2,a=$ALPHA,projfn=$INNER,h=10,hp=200,rehu=$REHU,scale_fx=${SCALE_FX}]"
 
 mkdir -p "$OUTDIR"
 echo $MODEL > "$OUTDIR/model"

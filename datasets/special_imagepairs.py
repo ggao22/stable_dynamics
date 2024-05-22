@@ -12,13 +12,14 @@ class SpecialSeqPairs(torch.utils.data.Dataset):
         self.image_dataset = np.moveaxis(data['images'], 3, 1)
         self.end_indices = data['motion_start'].astype(int) - 1
         self.end_indices[0] = len(self.image_dataset) - 1
+        self.transform = transform
 
     def __getitem__(self, index):
         if index not in self.end_indices:
-            q1 = transform(self.image_dataset[index])
-            q2 = transform(self.image_dataset[index + 1])
+            q1 = self.transform(self.image_dataset[index])
+            q2 = self.transform(self.image_dataset[index + 1])
         else:
-            q1 = q2 = transform(self.image_dataset[index])
+            q1 = q2 = self.transform(self.image_dataset[index])
         return ((q1, q2), (q1, q2))
 
     def __len__(self):
