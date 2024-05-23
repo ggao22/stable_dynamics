@@ -14,22 +14,22 @@ class VAE(nn.Module):
     def __init__(self, LATENT_SPACE_DIM=320):
         super().__init__()
 
-        self.size_after_conv = [128, 5, 5]
+        self.size_after_conv = [128, 12, 12]
 
-        self.fc_e1 = nn.Conv2d(3, 8, 9, stride=2)
-        self.fc_e2 = nn.Conv2d(8, 16, 9, stride=2)
-        self.fc_e3 = nn.Conv2d(16, 32, 5, stride=2)
-        self.fc_e4 = nn.Conv2d(32, 64, 5, stride=2)
-        self.fc_e5 = nn.Conv2d(64, 128, 3, stride=2)
+        self.fc_e1 = nn.Conv2d(3, 8, kernel_size=4, padding=1, stride=2)
+        self.fc_e2 = nn.Conv2d(8, 16, kernel_size=4, padding=1, stride=2)
+        self.fc_e3 = nn.Conv2d(16, 32, kernel_size=4, padding=1, stride=2)
+        self.fc_e4 = nn.Conv2d(32, 64, kernel_size=4, padding=1, stride=2)
+        self.fc_e5 = nn.Conv2d(64, 128, kernel_size=4, padding=1, stride=2)
         self.fc_e61 = nn.Linear(np.prod(self.size_after_conv), LATENT_SPACE_DIM)
         self.fc_e62 = nn.Linear(np.prod(self.size_after_conv), LATENT_SPACE_DIM)
 
         self.fc_d1 = nn.Linear(LATENT_SPACE_DIM, np.prod(self.size_after_conv))
-        self.fc_d2 = nn.ConvTranspose2d(128, 64, 3, stride=2)
-        self.fc_d3 = nn.ConvTranspose2d(64, 32, 5, stride=2)
-        self.fc_d4 = nn.ConvTranspose2d(32, 16, 5, stride=2)
-        self.fc_d5 = nn.ConvTranspose2d(16,  8, 9, stride=2)
-        self.fc_d6 = nn.ConvTranspose2d( 8,  3, 9, stride=2)
+        self.fc_d2 = nn.ConvTranspose2d(128, 64, kernel_size=4, padding=1, stride=2)
+        self.fc_d3 = nn.ConvTranspose2d(64, 32, kernel_size=4, padding=1, stride=2)
+        self.fc_d4 = nn.ConvTranspose2d(32, 16, kernel_size=4, padding=1, stride=2)
+        self.fc_d5 = nn.ConvTranspose2d(16,  8, kernel_size=4, padding=1, stride=2)
+        self.fc_d6 = nn.ConvTranspose2d( 8,  3, kernel_size=4, padding=1, stride=2)
 
     def encode(self, x):
         x = F.relu(self.fc_e1(x))

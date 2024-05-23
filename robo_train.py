@@ -81,13 +81,10 @@ def main(args):
     for epoch in range(1, args.epochs + 1):
         model.train()
         loss_parts = []
-        logger.info('HERE0')
 
         for batch_idx, data in enumerate(train_dataloader):
             optimizer.zero_grad()
-            logger.info('HERE1')
             loss, _ = runbatch(args, model, args.model.loss, data)
-            logger.info('HERE2')
             loss_parts.append(np.array([l.cpu().item() for l in args.model.loss_flatten(loss)]))
 
             optim_loss = loss[0] if isinstance(loss, (tuple, list)) else loss
