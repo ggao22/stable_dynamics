@@ -18,7 +18,6 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader
 from torchvision.utils import save_image
 from util import DynamicLoad, setup_logging, to_variable
-from tqdm.notebook import trange, tqdm
 
 logger = setup_logging(os.path.basename(__file__))
 
@@ -79,11 +78,11 @@ def main(args):
 
     # TODO: Resume training support
     logger.info("Start Training.")
-    for epoch in trange(1, args.epochs + 1, leave=False):
+    for epoch in range(1, args.epochs + 1):
         model.train()
         loss_parts = []
 
-        for batch_idx, data in enumerate(tqdm(train_dataloader, leave=False)):
+        for batch_idx, data in enumerate(train_dataloader):
             optimizer.zero_grad()
             loss, _ = runbatch(args, model, args.model.loss, data)
             loss_parts.append(np.array([l.cpu().item() for l in args.model.loss_flatten(loss)]))
