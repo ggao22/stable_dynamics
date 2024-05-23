@@ -31,7 +31,7 @@ def main(args):
     vaemod = model.vae
 
     if args.random is not None:
-        X = torch.tensor(np.random.normal(loc=0.0, scale=args.random, size=[args.batch_size, 320]).astype(np.float32))
+        X = torch.tensor(np.random.normal(loc=0.0, scale=args.random, size=[args.batch_size, args.latent_size]).astype(np.float32))
         X = to_variable(X, torch.cuda.is_available())
         output = vaemod.decode(X)
 
@@ -55,6 +55,7 @@ if __name__ == "__main__":
     parser.add_argument('dataset', type=DynamicLoad("datasets"), help='dataset to train on')
     parser.add_argument('model', type=DynamicLoad("models"), help='model to train with')
     parser.add_argument('weight', type=latest_file, help='save model weight')
+    parser.add_argument('--latent-size', type=int, default=320, help='latent size')
     parser.add_argument('--batch-size', type=int, default=256, help='batch size')
     parser.add_argument('--save', type=str, help="save renders as a single image")
     parser.add_argument('--random', type=float, help="sample the space randomly, with zero mean and provided variance")
