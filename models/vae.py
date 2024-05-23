@@ -20,12 +20,12 @@ class VAE(nn.Module):
         self.fc_e2 = nn.Conv2d(8, 16, 9, stride=2)
         self.fc_e3 = nn.Conv2d(16, 32, 5, stride=2)
         self.fc_e4 = nn.Conv2d(32, 64, 5, stride=2)
-        self.fc_e5 = nn.Conv2d(64, 128, 3, stride=1)
+        self.fc_e5 = nn.Conv2d(64, 128, 3, stride=2)
         self.fc_e61 = nn.Linear(np.prod(self.size_after_conv), LATENT_SPACE_DIM)
         self.fc_e62 = nn.Linear(np.prod(self.size_after_conv), LATENT_SPACE_DIM)
 
         self.fc_d1 = nn.Linear(LATENT_SPACE_DIM, np.prod(self.size_after_conv))
-        self.fc_d2 = nn.ConvTranspose2d(128, 64, 3, stride=1)
+        self.fc_d2 = nn.ConvTranspose2d(128, 64, 3, stride=2)
         self.fc_d3 = nn.ConvTranspose2d(64, 32, 5, stride=2)
         self.fc_d4 = nn.ConvTranspose2d(32, 16, 5, stride=2)
         self.fc_d5 = nn.ConvTranspose2d(16,  8, 9, stride=2)
@@ -52,7 +52,7 @@ class VAE(nn.Module):
     def decode(self, z):
         nb = z.size()[0]
         z = self.fc_d1(z)
-        # z = z.view([nb]+self.size_after_conv)
+        z = z.view([nb]+self.size_after_conv)
         z = F.relu(self.fc_d2(z))
         z = F.relu(self.fc_d3(z))
         z = F.relu(self.fc_d4(z))
