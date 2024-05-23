@@ -40,7 +40,7 @@ def test_model(args, model, test_dataloader, epoch=None, summarywriter=None):
         loss_parts.append(np.array([l.cpu().item() for l in args.model.loss_flatten(loss)]))
 
         # Add parts to the summary if needed.
-        args.model.summary(epoch, summarywriter, Ypred, data[0])
+        # args.model.summary(epoch, summarywriter, Ypred, data[0])
 
     return sum(loss_parts) / len(test_dataloader.dataset)
 
