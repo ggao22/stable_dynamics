@@ -33,7 +33,6 @@ date >> "$OUTDIR/progress.txt"
     --log-to "/runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
     --learning-rate "0.0002"                \
-    --latent_space_dim 10                   \
     --epochs 150                            \
     special_imagepairs[file=$DATA_FILE]    \
     "$MODEL"                                \
