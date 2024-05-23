@@ -34,7 +34,7 @@ date >> "$OUTDIR/progress.txt"
     --batch-size $BATCH_SIZE                        \
     --learning-rate "0.0002"                \
     --epochs 150                            \
-    special_imagepairs[file=$DATA_FILE]    \
+    specimagepairs[file=$DATA_FILE]    \
     "$MODEL"                                \
     "$OUTDIR/checkpoint_{epoch:0>5}.pth" | tee -a "$OUTDIR/progress.txt"
 
