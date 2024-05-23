@@ -4,7 +4,7 @@ set -e
 
 DATASET="$1"
 shift
-MODEL="$2"
+MODEL="$1"
 shift
 
 for INDIR in "$@";
