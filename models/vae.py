@@ -14,7 +14,7 @@ class VAE(nn.Module):
     def __init__(self, LATENT_SPACE_DIM=320):
         super().__init__()
 
-        self.size_after_conv = (128, 10, 10)
+        self.size_after_conv = [128, 10, 10]
 
         self.fc_e1 = nn.Conv2d(3, 8, 9, stride=2)
         self.fc_e2 = nn.Conv2d(8, 16, 9, stride=2)
@@ -52,7 +52,7 @@ class VAE(nn.Module):
     def decode(self, z):
         nb = z.size()[0]
         z = self.fc_d1(z)
-        z = z.view([nb, 128, 9, 14])
+        z = z.view([nb]+self.size_after_conv)
         z = F.relu(self.fc_d2(z, output_size=[nb, 32, 11, 16]))
         z = F.relu(self.fc_d3(z, output_size=[nb, 32, 25, 35]))
         z = F.relu(self.fc_d4(z, output_size=[nb, 16, 54, 74]))
