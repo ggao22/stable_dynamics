@@ -35,8 +35,8 @@ def test_model(args, model, test_dataloader, epoch=None, summarywriter=None):
     for batch_idx, data in enumerate(test_dataloader):
         loss, Ypred = runbatch(args, model, args.model.loss, data)
         Y_a, _, _, _, Y_b, _ = Ypred
-        save_image(Y_a, args.log_to)
-        save_image(Y_b, args.log_to)
+        save_image(Y_a, os.path.join(args.log_to, 'Y_a.png'))
+        save_image(Y_b, os.path.join(args.log_to, 'Y_b.png'))
         loss_parts.append(np.array([l.cpu().item() for l in args.model.loss_flatten(loss)]))
 
         # Add parts to the summary if needed.
