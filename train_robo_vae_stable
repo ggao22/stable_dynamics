@@ -33,7 +33,7 @@ date >> "$OUTDIR/progress.txt"
     --log-to "runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
     --learning-rate "0.0002"                \
-    --epochs 150                            \
+    --epochs 300                            \
     specimagepairs[file=$DATA_FILE]    \
     "$MODEL"                                \
     "$OUTDIR/checkpoint_{epoch:0>5}.pth" | tee -a "$OUTDIR/progress.txt"
