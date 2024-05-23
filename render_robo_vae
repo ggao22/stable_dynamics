@@ -29,6 +29,11 @@ do
         --save "$INDIR/plot.strip.png"      \
         "$INDIR/trajectory.h5"
 
+    ./plot_data.py              \
+        --tsne                             \
+        --save "$INDIR/plot.strip.png"      \
+        "$INDIR/trajectory.h5"
+
     ./vae_trajmodel.py              \
         "$INDIR/trajectory.h5"                  \
         "$MODEL"                                \

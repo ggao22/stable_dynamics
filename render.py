@@ -41,7 +41,8 @@ def main(args):
         for batch_idx, data in enumerate(test_dataloader):
             X, Yactual = data
             X = to_variable(X, torch.cuda.is_available())
-            output = vaemod(X)
+            X_a, X_b = X
+            output = vaemod(X_a)
             break
 
     if isinstance(output, tuple):
