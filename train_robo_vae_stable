@@ -8,7 +8,7 @@ DATA_FILE="$3"
 W1="$4"
 W2="$5"
 INNER="$6"
-LSD="10"
+LSD="15"
 ALPHA="0.0001"
 REHU="0.0001"
 SCALE_FX="$7"
@@ -33,7 +33,7 @@ date >> "$OUTDIR/progress.txt"
     --log-to "runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
     --learning-rate "0.0004"                \
-    --epochs 150                         \
+    --epochs 150                            \
     specimagepairs[file=$DATA_FILE]    \
     "$MODEL"                                \
     "$OUTDIR/checkpoint_{epoch:0>5}.pth" | tee -a "$OUTDIR/progress.txt"

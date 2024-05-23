@@ -18,16 +18,16 @@ do
         "$INDIR/checkpoint_*.pth"               \
         "$INDIR/trajectory.h5"
 
-    ./plot_data.py              \
-        --pca 2                             \
-        --save "$INDIR/plot.pca.png"        \
-        "$INDIR/trajectory.h5"
+    # ./plot_data.py              \
+    #     --pca 2                             \
+    #     --save "$INDIR/plot.pca.png"        \
+    #     "$INDIR/trajectory.h5"
 
-    ./plot_data.py              \
-        --pca 2                             \
-        --strip 50 500                      \
-        --save "$INDIR/plot.strip.png"      \
-        "$INDIR/trajectory.h5"
+    # ./plot_data.py              \
+    #     --pca 2                             \
+    #     --strip 50 500                      \
+    #     --save "$INDIR/plot.strip.png"      \
+    #     "$INDIR/trajectory.h5"
 
     ./plot_data.py              \
         --tsne                             \
