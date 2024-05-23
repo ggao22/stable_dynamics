@@ -53,11 +53,11 @@ class VAE(nn.Module):
         nb = z.size()[0]
         z = self.fc_d1(z)
         z = z.view([nb]+self.size_after_conv)
-        z = F.relu(self.fc_d2(z, output_size=[nb, 32, 11, 16]))
-        z = F.relu(self.fc_d3(z, output_size=[nb, 32, 25, 35]))
-        z = F.relu(self.fc_d4(z, output_size=[nb, 16, 54, 74]))
-        z = F.relu(self.fc_d5(z, output_size=[nb,  8, 116, 156]))
-        z = F.relu(self.fc_d6(z, output_size=[nb,  3, 240, 320]))
+        z = F.relu(self.fc_d2(z))
+        z = F.relu(self.fc_d3(z))
+        z = F.relu(self.fc_d4(z))
+        z = F.relu(self.fc_d5(z))
+        z = F.relu(self.fc_d6(z))
         z = torch.sigmoid(z)
         return z
 
