@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import logging
+
 from . import images
 import numpy as np
 import torch
