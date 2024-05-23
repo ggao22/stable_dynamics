@@ -47,6 +47,7 @@ def DynamicLoad(pkg):
         if m is None:
             logger.error(f"Incorrect import string {modnamefull}")
             raise RuntimeError("Incorrect import.")
+        
 
         modname = m.group(1)
         props = m.group(3)
@@ -60,7 +61,9 @@ def DynamicLoad(pkg):
         return modname, props
 
     def _load_actual(modnamefull):
+        print(modnamefull)
         modname, props = _split_name(modnamefull)
+        print(modname)
         try:
             load_mod = importlib.import_module(pkg + "." + modname, package="")
         except Exception as e:
