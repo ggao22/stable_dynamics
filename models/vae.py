@@ -14,7 +14,7 @@ class VAE(nn.Module):
     def __init__(self, LATENT_SPACE_DIM=320):
         super().__init__()
 
-        self.size_after_conv = [128, 10, 10]
+        self.size_after_conv = [128, 5, 5]
 
         self.fc_e1 = nn.Conv2d(3, 8, 9, stride=2)
         self.fc_e2 = nn.Conv2d(8, 16, 9, stride=2)
