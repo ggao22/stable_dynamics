@@ -11,25 +11,25 @@ for INDIR in "$@";
 do
     echo "PROCESSING $INDIR"
 
-    ./.colorize ./trajectory.py                 \
+    ./trajectory.py                 \
         --batch-size 360                        \
         specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
         "$INDIR/trajectory.h5"
 
-    ./.colorize ./plot_data.py              \
+    ./plot_data.py              \
         --pca 2                             \
         --save "$INDIR/plot.pca.png"        \
         "$INDIR/trajectory.h5"
 
-    ./.colorize ./plot_data.py              \
+    ./plot_data.py              \
         --pca 2                             \
         --strip 50 500                      \
         --save "$INDIR/plot.strip.png"      \
         "$INDIR/trajectory.h5"
 
-    ./.colorize ./vae_trajmodel.py              \
+    ./vae_trajmodel.py              \
         "$INDIR/trajectory.h5"                  \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
@@ -37,20 +37,20 @@ do
         --pca 2                                 \
         --save "$INDIR/plot.trajmodel.png"
 
-    ./.colorize ./vae_trajmodel.py              \
+    ./vae_trajmodel.py              \
         "$INDIR/trajectory.h5"                  \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
         render                                  \
         --save "$INDIR/trajmodel_render.png"
 
-    ./.colorize ./render.py                     \
+    ./render.py                     \
         specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
         --save "$INDIR/vae_render.png"
 
-    ./.colorize ./render.py                     \
+    ./render.py                     \
         specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
@@ -58,7 +58,7 @@ do
         --save "$INDIR/vae_render_random.png"
 
     mkdir -p "$INDIR/frames"
-    ./.colorize ./vae_trajmodel.py              \
+    ./vae_trajmodel.py              \
         --steps 300                             \
         "$INDIR/trajectory.h5"                  \
         "$MODEL"                                \
