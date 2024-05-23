@@ -17,11 +17,14 @@ class VAE(nn.Module):
         self.size_after_conv = [128, 8, 8]
         self.inter_size = 512
 
-        self.fc_e1 = nn.Conv2d(3, 8, kernel_size=4, padding=1, stride=2)
-        self.fc_e2 = nn.Conv2d(8, 16, kernel_size=4, padding=1, stride=2)
-        self.fc_e3 = nn.Conv2d(16, 32, kernel_size=4, padding=1, stride=2)
-        self.fc_e4 = nn.Conv2d(32, 64, kernel_size=4, padding=1, stride=2)
-        self.fc_e5 = nn.Conv2d(64, 128, kernel_size=4, padding=1, stride=2)
+        self.fc_e1 = nn.Conv2d(3, 32, kernel_size=4, padding=1, stride=2)
+        self.be1 = nn.BatchNorm2d(32)
+        self.fc_e2 = nn.Conv2d(32, 64, kernel_size=4, padding=1, stride=2)
+        self.be2 = nn.BatchNorm2d(64)
+        self.fc_e3 = nn.Conv2d(64, 128, kernel_size=4, padding=1, stride=2)
+        self.be3 = nn.BatchNorm2d(128)
+        self.fc_e4 = nn.Conv2d(128, 256, kernel_size=4, padding=1, stride=2)
+        self.be4 = nn.BatchNorm2d(256)
         self.fc_e61 = nn.Linear(np.prod(self.size_after_conv), self.inter_size)
         self.fc_e71 = nn.Linear(self.inter_size, LATENT_SPACE_DIM)
         self.fc_e62 = nn.Linear(np.prod(self.size_after_conv), self.inter_size)
@@ -29,18 +32,25 @@ class VAE(nn.Module):
 
         self.fc_d11 = nn.Linear(LATENT_SPACE_DIM, self.inter_size)
         self.fc_d12 = nn.Linear(self.inter_size, np.prod(self.size_after_conv))
-        self.fc_d2 = nn.ConvTranspose2d(128, 64, kernel_size=4, padding=1, stride=2)
-        self.fc_d3 = nn.ConvTranspose2d(64, 32, kernel_size=4, padding=1, stride=2)
-        self.fc_d4 = nn.ConvTranspose2d(32, 16, kernel_size=4, padding=1, stride=2)
-        self.fc_d5 = nn.ConvTranspose2d(16,  8, kernel_size=4, padding=1, stride=2)
-        self.fc_d6 = nn.ConvTranspose2d( 8,  3, kernel_size=4, padding=1, stride=2)
+        self.fc_d2 = nn.ConvTranspose2d(256, 128, kernel_size=4, padding=1, stride=2)
+        self.bd1 = nn.BatchNorm2d(128)
+        self.fc_d3 = nn.ConvTranspose2d(128, 64, kernel_size=4, padding=1, stride=2)
+        self.bd2 = nn.BatchNorm2d(64)
+        self.fc_d4 = nn.ConvTranspose2d(64, 32, kernel_size=4, padding=1, stride=2)
+        self.bd3 = nn.BatchNorm2d(32)
+        self.fc_d5 = nn.ConvTranspose2d(32,  3, kernel_size=4, padding=1, stride=2)
+        self.bd4 = nn.BatchNorm2d(3)
 
     def encode(self, x):
         x = F.relu(self.fc_e1(x))
+        x = self.be1(x)
         x = F.relu(self.fc_e2(x))
+        x = self.be2(x)
         x = F.relu(self.fc_e3(x))
+        x = self.be3(x)
         x = F.relu(self.fc_e4(x))
-        x = F.relu(self.fc_e5(x))
+        x = self.be4(x)
+
         # logger.info(x.shape)
         x = x.view([x.size()[0], -1])
         
@@ -65,11 +75,15 @@ class VAE(nn.Module):
         z = F.relu(self.fc_d11(z))
         z = self.fc_d12(z)
         z = z.view([nb]+self.size_after_conv)
+        
         z = F.relu(self.fc_d2(z))
+        z = self.bd1(z)
         z = F.relu(self.fc_d3(z))
+        z = self.bd2(z)
         z = F.relu(self.fc_d4(z))
+        z = self.bd3(z)
         z = F.relu(self.fc_d5(z))
-        z = F.relu(self.fc_d6(z))
+        z = self.bd4(z)
         z = torch.sigmoid(z)
         return z
 

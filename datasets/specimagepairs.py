@@ -24,10 +24,10 @@ class SpecialSeqPairs(torch.utils.data.Dataset):
 
     def __getitem__(self, index):
         if index not in self.end_indices:
-            q1 = self.transform(self.image_dataset[index]).float()/255
-            q2 = self.transform(self.image_dataset[index + 1]).float()/255
+            q1 = self.transform(self.image_dataset[index])
+            q2 = self.transform(self.image_dataset[index + 1])
         else:
-            q1 = q2 = self.transform(self.image_dataset[index]).float()/255
+            q1 = q2 = self.transform(self.image_dataset[index])
         return ((q1, q2), (q1, q2))
 
     def __len__(self):
