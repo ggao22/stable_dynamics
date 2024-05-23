@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+EXPERIMENT_ID="$1"
+DATA_NAME="$2"
+DATA_FILE="$3"
+W1="$4"
+W2="$5"
+INNER="$6"
+LSD="10"
+ALPHA="0.0001"
+REHU="0.0001"
+SCALE_FX="$7"
+BATCH_SIZE="$8"
+
+OUTDIR="experiments/${EXPERIMENT_ID}/${DATA_NAME}_${W1}_${W2}_${INNER}_${ALPHA}_${REHU}_scaled${SCALE_FX}"
+MODEL="vae_trajectory[stable,w=$W1,bce=$W2,latent_space_dim=$LSD,a=$ALPHA,projfn=$INNER,h=320,hp=200,rehu=$REHU,scale_fx=${SCALE_FX}]"
+
+./render_robo_vae "$DATA_FILE" "$MODEL" "$OUTDIR"
