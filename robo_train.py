@@ -82,7 +82,7 @@ def main(args):
         model.train()
         loss_parts = []
 
-        for batch_idx, data in enumerate(train_dataloader):
+        for batch_idx, data in enumerate(tqdm(train_dataloader, leave=False)):
             optimizer.zero_grad()
             loss, _ = runbatch(args, model, args.model.loss, data)
             loss_parts.append(np.array([l.cpu().item() for l in args.model.loss_flatten(loss)]))
