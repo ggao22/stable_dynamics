@@ -59,7 +59,7 @@ do
         specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
-        --latent-size 10 \
+        --latent-size 15 \
         --random 3                              \
         --save "$INDIR/vae_render_random.png"
 
