@@ -13,7 +13,7 @@ do
 
     ./.colorize ./trajectory.py                 \
         --batch-size 360                        \
-        specimagepairs[files=$DATASET]    \
+        specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
         "$INDIR/trajectory.h5"
@@ -45,13 +45,13 @@ do
         --save "$INDIR/trajmodel_render.png"
 
     ./.colorize ./render.py                     \
-        specimagepairs[files=$DATASET]    \
+        specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
         --save "$INDIR/vae_render.png"
 
     ./.colorize ./render.py                     \
-        specimagepairs[files=$DATASET]    \
+        specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
         --random 3                              \
