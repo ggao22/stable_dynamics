@@ -5,14 +5,18 @@ import numpy as np
 import torch
 from torchvision import transforms
 
+logger = logging.getLogger(__name__)
+
 class SpecialSeqPairs(torch.utils.data.Dataset):
-    def __init__(self, npz_path, transform=transforms.Compose([transforms.ToTensor(), transforms.Resize(size=(256,256))])):
+    def __init__(self, npz_path, 
+                    transform=transforms.Compose([transforms.ToPILImage(), 
+                                                    transforms.ToTensor(), 
+                                                    transforms.Resize(size=(256,256))])):
         super().__init__()
         data = np.load(npz_path)
         self.image_dataset = np.moveaxis(data['images'], 3, 1)
         self.end_indices = (data['motion_start'] - 1).astype(int)
         self.end_indices[0] = len(self.image_dataset) - 1
-        self.end_indices = list(self.end_indices)
         self.transform = transform
 
     def __getitem__(self, index):
