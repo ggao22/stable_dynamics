@@ -61,9 +61,9 @@ def DynamicLoad(pkg):
         return modname, props
 
     def _load_actual(modnamefull):
-        print(modnamefull)
+        logger.info(modnamefull)
         modname, props = _split_name(modnamefull)
-        print(modname)
+        logger.info(modname)
         try:
             load_mod = importlib.import_module(pkg + "." + modname, package="")
         except Exception as e:
