@@ -10,8 +10,9 @@ class SpecialSeqPairs(torch.utils.data.Dataset):
         super().__init__()
         data = np.load(npz_path)
         self.image_dataset = np.moveaxis(data['images'], 3, 1)
-        self.end_indices = data['motion_start'].astype(int) - 1
+        self.end_indices = (data['motion_start'] - 1).astype(int)
         self.end_indices[0] = len(self.image_dataset) - 1
+        self.end_indices = list(self.end_indices)
         self.transform = transform
 
     def __getitem__(self, index):
