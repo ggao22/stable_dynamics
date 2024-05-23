@@ -52,7 +52,7 @@ class VAE(nn.Module):
     def decode(self, z):
         nb = z.size()[0]
         z = self.fc_d1(z)
-        z = z.view([nb]+self.size_after_conv)
+        # z = z.view([nb]+self.size_after_conv)
         z = F.relu(self.fc_d2(z))
         z = F.relu(self.fc_d3(z))
         z = F.relu(self.fc_d4(z))
