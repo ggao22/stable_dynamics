@@ -8,6 +8,7 @@ DATA_FILE="$3"
 W1="$4"
 W2="$5"
 INNER="$6"
+LSD="10"
 ALPHA="0.0001"
 REHU="0.0001"
 SCALE_FX="$7"
@@ -22,7 +23,7 @@ elif [ -z "$DATA_FILE" ]; then
 fi
 
 OUTDIR="/experiments/${EXPERIMENT_ID}/${DATA_NAME}_${W1}_${W2}_${INNER}_${ALPHA}_${REHU}_scaled${SCALE_FX}"
-MODEL="vae_trajectory[stable,w=$W1,bce=$W2,a=$ALPHA,projfn=$INNER,h=320,hp=200,rehu=$REHU,scale_fx=${SCALE_FX}]"
+MODEL="vae_trajectory[stable,w=$W1,bce=$W2,latent_space_dim=$LSD,a=$ALPHA,projfn=$INNER,h=320,hp=200,rehu=$REHU,scale_fx=${SCALE_FX}]"
 
 mkdir -p "$OUTDIR"
 echo $MODEL > "$OUTDIR/model"
@@ -32,7 +33,7 @@ date >> "$OUTDIR/progress.txt"
     --log-to "/runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
     --learning-rate "0.0002"                \
-    --latent_space_dim 10\
+    --latent_space_dim 10                   \
     --epochs 150                            \
     special_imagepairs[file=$DATA_FILE]    \
     "$MODEL"                                \
