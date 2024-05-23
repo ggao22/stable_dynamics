@@ -37,7 +37,7 @@ class VAE(nn.Module):
         x = F.relu(self.fc_e3(x))
         x = F.relu(self.fc_e4(x))
         x = F.relu(self.fc_e5(x))
-        logger.info(x.shape)
+        # logger.info(x.shape)
         x = x.view([x.size()[0], -1])
         return self.fc_e61(x), self.fc_e62(x)
 
