@@ -77,6 +77,7 @@ def main(args):
     optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
 
     # TODO: Resume training support
+    logger.info("Start Training.")
     for epoch in range(1, args.epochs + 1):
         model.train()
         loss_parts = []
