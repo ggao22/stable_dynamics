@@ -32,8 +32,8 @@ date >> "$OUTDIR/progress.txt"
 ./robo_train.py                      \
     --log-to "runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
-    --learning-rate "0.0002"                \
-    --epochs 300                            \
+    --learning-rate "0.0004"                \
+    --epochs 150                         \
     specimagepairs[file=$DATA_FILE]    \
     "$MODEL"                                \
     "$OUTDIR/checkpoint_{epoch:0>5}.pth" | tee -a "$OUTDIR/progress.txt"
