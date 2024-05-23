@@ -29,7 +29,6 @@ class VAE(nn.Module):
         self.fc_d6 = nn.ConvTranspose2d( 8,  3, 9, stride=2)
 
     def encode(self, x):
-        assert list(x.size())[1:] == [3, 240, 320]
         x = F.relu(self.fc_e1(x))
         x = F.relu(self.fc_e2(x))
         x = F.relu(self.fc_e3(x))
