@@ -21,7 +21,7 @@ def main(args):
     if torch.cuda.is_available():
         device = "cuda"
 
-    model.load_state_dict(torch.load(args.weight), map_location=device)
+    model.load_state_dict(torch.load(args.weight, map_location=device))
     model.eval()
 
     dyn_model = model.dyn
