@@ -31,7 +31,7 @@ class SpecialSeqPairs(torch.utils.data.Dataset):
         return ((q1, q2), (q1, q2))
 
     def __len__(self):
-        return len(self.image_dataset) - 1
+        return len(self.image_dataset)
 
 def build(props):
     return SpecialSeqPairs(props['file'])
