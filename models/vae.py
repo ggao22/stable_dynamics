@@ -11,10 +11,10 @@ from torch.autograd import Variable
 logger = logging.getLogger(__name__)
 
 class VAE(nn.Module):
-    def __init__(self, LATENT_SPACE_DIM=320):
+    def __init__(self, LATENT_SPACE_DIM=320, num_imgs=1):
         super().__init__()
 
-        self.size_after_conv = [256, 16, 16]
+        self.size_after_conv = [256, 16*num_imgs, 16*num_imgs]
         self.inter_size = 512
 
         self.fc_e1 = nn.Conv2d(3, 32, kernel_size=4, padding=1, stride=2)
@@ -140,7 +140,9 @@ def configure(props):
 
     try:
         lsd = props["latent_space_dim"]
-        model = VAE(lsd)
+        if "num_imgs" in props:
+            num_imgs = props["num_imgs"]
+        model = VAE(lsd, num_imgs)
     except KeyError:
         pass
     logger.info(f"Latent space is 1x{lsd}.")

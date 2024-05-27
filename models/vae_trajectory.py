@@ -59,7 +59,7 @@ def configure(props):
 
     lsd = int(props["latent_space_dim"]) if "latent_space_dim" in props else 320
     logger.info(f"Set latent space dim to {lsd}")
-    vaemod.configure({ **props, "latent_space_dim": lsd })
+    vaemod.configure({ **props, "latent_space_dim": lsd, "num_imgs": 2})
     dynmod.configure({ **props, "latent_space_dim": lsd })
 
     if "w" in props:
