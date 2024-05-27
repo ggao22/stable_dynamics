@@ -12,7 +12,8 @@ do
     echo "PROCESSING $INDIR"
 
     ./trajectory.py                 \
-        --batch-size 360                        \
+        --batch-size 2                        \
+        --mu                            \
         specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \

@@ -16,10 +16,13 @@ logger = setup_logging(os.path.basename(__file__))
 
 def main(args):
     model = args.model.model
-    model.load_state_dict(torch.load(args.weight))
-    model.eval()
+    
+    device = torch.device('cpu')
     if torch.cuda.is_available():
-        model.cuda()
+        device = "cuda"
+
+    model.load_state_dict(torch.load(args.weight), map_location=device)
+    model.eval()
 
     dyn_model = model.dyn
     vae_model = model.vae
