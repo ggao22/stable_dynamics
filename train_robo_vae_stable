@@ -32,8 +32,8 @@ date >> "$OUTDIR/progress.txt"
 ./robo_train.py                      \
     --log-to "runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
-    --learning-rate "0.0004"                \
-    --epochs 250                            \
+    --learning-rate "0.0008"                \
+    --epochs 400                            \
     --save-every 50                     \
     specimagepairs[file=$DATA_FILE]    \
     "$MODEL"                                \
