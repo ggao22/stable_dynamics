@@ -12,8 +12,7 @@ logger = logging.getLogger(__name__)
 class SpecialSeqPairs(torch.utils.data.Dataset):
     def __init__(self, npz_path, 
                     transform=transforms.Compose([transforms.ToPILImage(), 
-                                                    transforms.ToTensor(), 
-                                                    transforms.Resize(size=(256,256))])):
+                                                    transforms.ToTensor()])):
         super().__init__()
         data = np.load(npz_path)
         # self.image_dataset = np.moveaxis(data['images'], 3, 1)
