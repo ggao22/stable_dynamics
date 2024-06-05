@@ -26,7 +26,8 @@ class SpecialSeqPairs(torch.utils.data.Dataset):
             q1 = self.transform(self.image_dataset[index])
             q2 = self.transform(self.image_dataset[index + 1])
         else:
-            q1 = q2 = self.transform(self.image_dataset[index])
+            q1 = self.transform(self.image_dataset[index - 1])
+            q2 = self.transform(self.image_dataset[index])
         return ((q1, q2), (q1, q2))
 
     def __len__(self):
