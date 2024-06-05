@@ -30,6 +30,7 @@ echo $MODEL > "$OUTDIR/model"
 
 date >> "$OUTDIR/progress.txt"
 ./robo_train.py                      \
+    --pre-trained-weights ""         \
     --log-to "runs/$OUTDIR"                 \
     --batch-size $BATCH_SIZE                        \
     --learning-rate "0.0002"                \

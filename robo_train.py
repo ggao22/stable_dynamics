@@ -80,6 +80,9 @@ def main(args):
     optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
 
     # TODO: Resume training support
+    if args.pre_trained_weights:
+        model.load_state_dict(torch.load(args.weight))
+        
     logger.info("Start Training.")
     for epoch in range(1, args.epochs + 1):
         model.train()
@@ -116,6 +119,7 @@ if __name__ == "__main__":
     parser.add_argument('dataset', type=DynamicLoad("datasets"), help='dataset to train on')
     parser.add_argument('model', type=DynamicLoad("models"), help='model to train with')
     parser.add_argument('weights', type=str, help='save model weights')
+    parser.add_argument('--pre-trained-weights', type=str, help='weights to resume from')
     parser.add_argument('--log-to', type=str, help='log destination within runs/')
     parser.add_argument('--test-with', type=DynamicLoad("datasets"), default=None, help='dataset to test with instead of the training data')
     parser.add_argument('--batch-size', type=int, default=256, help='batch size')
