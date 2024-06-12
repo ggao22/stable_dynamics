@@ -15,7 +15,7 @@ class VAE(nn.Module):
         super().__init__()
 
         # self.size_after_conv = [256, 16*num_imgs, 16] #image size 256
-        self.size_after_conv = [128, 8*num_imgs, 8] #image size 128
+        self.size_after_conv = [256, 8*num_imgs, 8] #image size 128
         self.inter_size = 512
 
         self.fc_e1 = nn.Conv2d(3, 32, kernel_size=4, padding=1, stride=2)
