@@ -14,7 +14,7 @@ class SpecialSeqPairs(torch.utils.data.Dataset):
                     transform=transforms.Compose([transforms.ToPILImage(), 
                                                     transforms.ToTensor()])):
         super().__init__()
-        data = np.load(npz_path)
+        data = np.load(npz_path, allow_pickle=True)
         self.image_dataset = data['data'][()]['img'][:,:,:,[2,1,0]]
         self.end_indices = (data['meta'][()]['episode_ends'] - 1).astype(int)
         # self.end_indices[0] = len(self.image_dataset) - 1
