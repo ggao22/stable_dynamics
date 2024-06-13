@@ -17,7 +17,7 @@ VERIFY = True
 V_SCALE = 0.01
 
 global V_WRAP, SCALE_FX
-V_WRAP = False
+V_WRAP = True
 SCALE_FX = False
 
 class Dynamics(nn.Module):
