@@ -13,7 +13,7 @@ logger = logging.getLogger(__file__)
 #
 
 # You can use this to compensate for numeric error:
-VERIFY = False
+VERIFY = True
 V_SCALE = 0.01
 
 global V_WRAP, SCALE_FX
