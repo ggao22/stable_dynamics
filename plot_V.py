@@ -37,9 +37,10 @@ def main(args):
     X = to_variable(X, torch.cuda.is_available())
     X_a, X_b = X
     recon, mu, logvar, z = vaemod(X_a)
+    v = model.dyn.V(mu).detach().cpu().numpy()
 
     fig, ax = plt.subplots()  # create figure & 1 axis
-    ax.plot(mu)
+    ax.plot(v)
     fig.savefig(args.save)   # save the figure to file
     plt.close(fig)
     

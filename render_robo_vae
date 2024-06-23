@@ -60,6 +60,7 @@ do
         specimagepairs[file=$DATASET]    \
         "$MODEL"                                \
         "$INDIR/checkpoint_*.pth"               \
+        --batch-size 90                \
         --save "$INDIR/V_plot.png"
 
     ./render.py                     \
