@@ -56,6 +56,12 @@ do
         "$INDIR/checkpoint_*.pth"               \
         --save "$INDIR/vae_render.png"
 
+    ./plot_V.py                     \
+        specimagepairs[file=$DATASET]    \
+        "$MODEL"                                \
+        "$INDIR/checkpoint_*.pth"               \
+        --save "$INDIR/V_plot.png"
+
     ./render.py                     \
         specimagepairs[file=$DATASET]    \
         "$MODEL"                                \

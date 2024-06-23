@@ -40,7 +40,7 @@ def main(args):
 
     fig, ax = plt.subplots()  # create figure & 1 axis
     ax.plot(mu)
-    fig.savefig('vip_embedding.png')   # save the figure to file
+    fig.savefig(args.save)   # save the figure to file
     plt.close(fig)
     
 
